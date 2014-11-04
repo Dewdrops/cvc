@@ -23,7 +23,8 @@ static bool flag_extract    = false,
             flag_gray       = false,
             flag_outputfile = false;
 
-void extract_range(const char *range_str) {
+void extract_range(const char *range_str)
+{
     frame_range[0] = atoi(range_str);
 
     const char *p = strchr(range_str, '-');
@@ -33,7 +34,8 @@ void extract_range(const char *range_str) {
     }
 }
 
-void subVideo(VideoCapture &capture, int beg, int end) {
+void subVideo(VideoCapture &capture, int beg, int end)
+{
     VideoWriter writer;
     int input_ex = static_cast<int>(capture.get(CV_CAP_PROP_FOURCC));
     Size input_size = Size((int) capture.get(CV_CAP_PROP_FRAME_WIDTH),
@@ -64,7 +66,8 @@ void subVideo(VideoCapture &capture, int beg, int end) {
     }
 }
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     const char *optstring = "o:ge:";
     option long_options[] = {
         {"output",  required_argument, NULL, 'o'},
