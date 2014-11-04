@@ -50,7 +50,7 @@ void subVideo(VideoCapture &capture, int beg, int end)
 
     writer.open(output_filename, input_ex, input_fps, input_size);
     if (! writer.isOpened()) {
-        printf("Load file %s failed\n", output_filename);
+        fprintf(stderr, "Load file %s failed\n", output_filename);
         exit(-1);
     }
 
@@ -97,7 +97,7 @@ int main(int argc, char *argv[])
     }
 
     if (!flag_outputfile || argv[optind] == NULL) {
-        printf("Usage: cvc [options] filename\n");
+        fprintf(stderr, "Usage: cvc [options] filename\n");
         exit(-1);
     }
     strncpy(input_filename, argv[optind], 1024);
@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
     VideoCapture capture;
     capture.open(input_filename);
     if (! capture.isOpened()) {
-        printf("Load file %s failed\n", input_filename);
+        fprintf(stderr, "Load file %s failed\n", input_filename);
         exit(-1);
     }
     int input_frame_cnt = capture.get(CV_CAP_PROP_FRAME_COUNT);
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
             Mat frame, frame_gray;
 
             if (frame_range[0] < 1 || frame_range[0] > input_frame_cnt) {
-                printf("Invalid frame id");
+                fprintf(stderr, "Invalid frame id\n");
                 exit(-1);
             }
             for (int i = 0; i < frame_range[0]; ++i) {
@@ -134,7 +134,7 @@ int main(int argc, char *argv[])
             if (frame_range[0] < 1 || frame_range[0] > input_frame_cnt ||
                         frame_range[1] < 1 || frame_range[1] > input_frame_cnt ||
                         frame_range[0] > frame_range[1]) {
-                printf("Invalid frame id");
+                fprintf(stderr, "Invalid frame id\n");
                 exit(-1);
             }
 
@@ -145,7 +145,7 @@ int main(int argc, char *argv[])
         subVideo(capture, 1, input_frame_cnt);
     }
     else {
-        printf("No operation specified");
+        fprintf(stderr, "No operation specified\n");
         exit(-1);
     }
 
